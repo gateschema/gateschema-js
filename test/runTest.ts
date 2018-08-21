@@ -1,5 +1,5 @@
-import * as I from '../../src/interface/index';
-import msgs from '../../src/msgs';
+import * as I from '../src/interface/index';
+import msgs from '../src/msgs';
 
 interface TestCase {
   schema: I.GateSchemaBase;

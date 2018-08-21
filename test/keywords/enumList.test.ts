@@ -1,4 +1,4 @@
-import { runTest, TestCaseConfig } from './index';
+import { runTest, TestCaseConfig } from '../runTest';
 
 import _ from '../../src/index';
 
