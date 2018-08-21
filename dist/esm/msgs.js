@@ -6,7 +6,7 @@ export default {
     list: 'should be an list',
     map: 'should be a map',
     enum: 'should be one of ${values}',
-    enumList: 'should be a list of ${values}',
+    enumList: 'should be a list only containing these values: ${values}',
     not: 'invalid value',
     equal: 'should equal to the value of ${id}',
     format: 'invalid ${format} format',

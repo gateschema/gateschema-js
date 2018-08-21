@@ -1,5 +1,4 @@
-import { GateSchema, GateSchemaBaseConstructor } from '../interface';
-import { KeywordAlias } from '../interface/index';
+import { GateSchema, GateSchemaBaseConstructor, KeywordAlias } from '../interface/index';
 
 const cond = {
   name: 'cond',

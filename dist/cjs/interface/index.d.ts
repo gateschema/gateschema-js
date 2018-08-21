@@ -162,11 +162,17 @@ export interface GateSchemaBase {
     [key: string]: any;
 }
 export interface GateSchemaKeywords {
+    r: GateSchema;
     required: GateSchema;
+    o: GateSchema;
     optional: GateSchema;
+    bool: GateSchema;
     boolean: GateSchema;
+    bin: GateSchema;
     binary: GateSchema;
+    num: GateSchema;
     number: GateSchema;
+    str: GateSchema;
     string: GateSchema;
     any: GateSchema;
     enum(definition: {

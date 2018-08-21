@@ -1,3 +1,5 @@
-import { KeywordAlias } from '../interface/index';
-declare const _default: KeywordAlias[];
+declare const _default: {
+    name: string;
+    add(): any;
+}[];
 export default _default;
