@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/GateSchema/gateschema-js.svg?branch=master)](https://travis-ci.org/GateSchema/gateschema-js)  [![Coverage Status](https://coveralls.io/repos/github/GateSchema/gateschema-js/badge.svg)](https://coveralls.io/github/GateSchema/gateschema-js)
+
 A simple and expressive [GateSchema](https://github.com/GateSchema/GateSchema) implementation
 
 ## What is GateSchema  

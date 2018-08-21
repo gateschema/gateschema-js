@@ -18,7 +18,8 @@
   "repository": "https://github.com/GateSchema/gateschema-js",
   "dependencies": {},
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest",
+    "test-coverage": "jest --coverage",
     "build": "tslint \"{src, test}/**/*.ts\" && tsc && tsc -p tsconfig.esm.json && rollup -c",
     "prettier:base": "prettier --parser typescript --single-quote",
     "prettier:check": "npm run prettier:base -- --list-different \"src/**/*.{ts,tsx}\"",
