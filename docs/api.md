@@ -1,8 +1,53 @@
+- [Keywords](#keywords)
+  * [Existance](#existance)
+    + [`required`](#-required-)
+    + [`optional`](#-optional-)
+  * [Base Types](#base-types)
+    + [`boolean`](#-boolean-)
+    + [`binary`](#-binary-)
+    + [`number`](#-number-)
+    + [`string`](#-string-)
+  * [Complex Types](#complex-types)
+    + [`any`](#-any-)
+    + [`enum(definition: {[label: string]: number})`](#-enum-definition----label--string---number---)
+    + [`enumList(definition: {[label: string]: number})`](#-enumlist-definition----label--string---number---)
+    + [`list(schema: GateSchema)`](#-list-schema--gateschema--)
+    + [`map(definition: {[key:string]: GateSchema})`](#-map-definition----key-string---gateschema---)
+    + [`oneOf(schemas: GateSchema[])`](#-oneof-schemas--gateschema----)
+    + [`value(value: any)`](#-value-value--any--)
+  * [Branching](#branching)
+    + [`switch(path: string, cases: {case: GateSchema, schema: GateSchema}[])`](#-switch-path--string--cases---case--gateschema--schema--gateschema-----)
+  * [Utils](#utils)
+    + [`equal(path: string)`](#-equal-path--string--)
+    + [`format(type: "date" | "date-time" | "hostname" | "uri" | "url" | "email" | "ipv4" | "ipv6")`](#-format-type---date-----date-time-----hostname-----uri-----url-----email-----ipv4-----ipv6---)
+    + [`length(range: number | [number] | [undefined, number] | [number, undefined] | [number, number])`](#-length-range--number----number-----undefined--number-----number--undefined-----number--number---)
+    + [`not(schema: GateSchema)`](#-not-schema--gateschema--)
+    + [`notEmpty`](#-notempty-)
+    + [`pattern(regex: string | RegExp, flags?: string)`](#-pattern-regex--string---regexp--flags---string--)
+    + [`unique`](#-unique-)
+  * [Other](#other)
+    + [`allowAdditional`](#-allowadditional-)
+    + [`other(...args: any[])`](#-other-args--any----)
+- [Methods](#methods)
+    + [`validate(...args: any[]): any`](#-validate-args--any-----any-)
+    + [`toJSON(): Constraint[]`](#-tojson----constraint---)
+    + [`$clone(options?: {pick?: string[], omit?: string[]}): GateSchema`](#--clone-options----pick---string----omit---string------gateschema-)
+    + [`$keys(): string[]`](#--keys----string---)
+    + [`$get(...args: any[]): GateSchema`](#--get-args--any-----gateschema-)
+    + [`$msg`](#--msg-)
+- [Static Methods](#static-methods)
+    + [`addMsgs(msgs: Msgs): void`](#-addmsgs-msgs--msgs---void-)
+    + [`addKeyword(keyword: Keyword, msgs?: Msgs): void`](#-addkeyword-keyword--keyword--msgs---msgs---void-)
+    + [`addAlias(alias: KeywordAlias): void`](#-addalias-alias--keywordalias---void-)
+    + [`extend<T extends this>(options?: Options): T`](#-extend-t-extends-this--options---options---t-)
+
 ## Keywords  
 
 ### Existance
-#### `required`
-Expect the input value to neither be `undefined` nor `null`
+#### `required`   
+Expect the input value to neither be `undefined` nor `null`  
+
+Alias `r`
 
 Example  
 ```js
@@ -27,6 +72,8 @@ schema.validate(null, (err) => {
 #### `optional`
 The input value can be `undefined` or `null`
 
+Alias `o`
+
 Example  
 ```js
 const schema = _.optional
@@ -44,8 +91,12 @@ schema.validate(null, (err) => {
 ```
 
 ### Base Types
-### `boolean`
+#### `boolean`
 Expect the input value to be `true` or `false`
+
+Alias `bool`
+
+Example  
 
 ```js
 const schema = _.boolean
@@ -68,6 +119,8 @@ schema.validate(1, (err) => {
 
 #### `binary`  
 Expect the input value to be a `ArrayBuffer` or base64 `string`
+
+Alias `bin`
 
 Example  
 ```js  
@@ -96,8 +149,10 @@ schema.validate('foo', (err) => {
 })
 ```
 
-### `number`   
-Expect the input value to be a `number` or numeric `string`
+#### `number`   
+Expect the input value to be a `number` or numeric `string`  
+
+Alias `num`  
 
 Example  
 ```js
@@ -124,8 +179,10 @@ schema.validate('abc', (err) => {
 })
 ```
 
-### `string`  
-Expect the input value to be a `string`
+#### `string`  
+Expect the input value to be a `string`  
+
+Alias `str`  
 
 Example  
 ```js  
@@ -197,6 +254,35 @@ schema.validate(3, (err) => {
   //   msg: 'should be one of [1,2]' }
 })
 ```
+
+#### `enumList(definition: {[label: string]: number})`
+Expect the input value to be a list of the defined values
+
+
+Example  
+```js
+const schema = _.enumList({
+  NAME: 1,
+  MOBILE: 2
+})
+
+schema.validate([1,2], (err) => {
+  console.log(err)
+  // null
+})
+
+schema.validate([3], (err) => {
+  console.log(err)
+  // ValidationError {
+  //   keyword: 'enumList',
+  //   msgParams: { keys: [ 'NAME', 'MOBILE' ], values: [ 1, 2 ], KEY: 'enumList' },
+  //   path: '/',
+  //   value: [ 3 ],
+  //   msg: 'should be a list only containing these values: 1,2' }
+
+})
+```
+
 
 #### `list(schema: GateSchema)`
 Expect the input value to be a list of values that satisfy the passing schema
