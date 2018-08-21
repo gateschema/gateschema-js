@@ -94,7 +94,7 @@ test('validate: skip async keyword', done => {
 
 test('validate return promise', () => {
   const schema = _.required.string;
-  expect(schema.validate(1)).resolves.toBeTruthy();
+  expect(schema.validate(1)).rejects.toBeTruthy();
   expect(schema.validate('1')).resolves.toBeFalsy();
 });
 
