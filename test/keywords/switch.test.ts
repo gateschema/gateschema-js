@@ -170,6 +170,43 @@ const cases: TestCaseConfig = {
           point: 2
         }
       ]
+    },
+    {
+      schema: _.map({
+        email: _.switch('/phone', [
+          {
+            case: _.required,
+            schema: _.optional
+          },
+          {
+            case: _.any,
+            schema: _.required
+          }
+        ]).string.notEmpty,
+        phone: _.switch('/email', [
+          {
+            case: _.required,
+            schema: _.optional
+          },
+          {
+            case: _.any,
+            schema: _.optional
+          }
+        ]).string.notEmpty
+      }),
+      pass: [
+        {
+          phone: '123'
+        },
+        {
+          email: '123'
+        },
+        {
+          phone: '12',
+          email: '34'
+        }
+      ],
+      fail: [{}]
     }
   ]
 };

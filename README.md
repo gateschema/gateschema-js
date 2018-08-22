@@ -1,6 +1,8 @@
 [![Build Status](https://travis-ci.org/GateSchema/gateschema-js.svg?branch=master)](https://travis-ci.org/GateSchema/gateschema-js)  [![Coverage Status](https://coveralls.io/repos/github/GateSchema/gateschema-js/badge.svg)](https://coveralls.io/github/GateSchema/gateschema-js)
 
-A simple and expressive [GateSchema](https://github.com/GateSchema/GateSchema) implementation
+A small, simple and expressive [GateSchema](https://github.com/GateSchema/GateSchema) implementation  
+* Zero dependencies  
+* 6.2k gziped  
 
 ## What is GateSchema  
 GateSchema specifies a list of keywords and a JSON-based format to define constraints of the data required by a given function, service or application. See [GateSchema](https://github.com/GateSchema/GateSchema) for more details.  
@@ -9,7 +11,7 @@ With tools of GateSchema, you may be able to
 * create schema using simple syntax provided by [gateschema-js](https://github.com/GateSchema/gateschema-js)   
 * share schema between client-side and server-side, crossing language    
 * generate forms, see [gateschema-form-vue](https://github.com/GateSchema/gateschema-form-vue) and [gateschema-form-react](https://github.com/GateSchema/gateschema-form-react)  
-* describe rpc service, see [Parton API](https://github.com/partonio/PartonAPI-Specification) 
+* describe rpc service, see [Parton API](https://github.com/partonio/PartonAPI-Specification)(WIP)
 
 
 ## Quick Start  

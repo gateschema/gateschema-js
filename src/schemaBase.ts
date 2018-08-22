@@ -421,7 +421,7 @@ class GateSchema implements I.GateSchemaBase {
       if (err) {
         switch (true) {
           case err === BREAK:
-            result = null;
+            result = BREAK;
             break;
           case err instanceof VError:
             result = err;
@@ -518,7 +518,7 @@ class GateSchema implements I.GateSchemaBase {
     const value: any = arguments[0];
     let options: any = arguments[1];
     let cb: any = arguments[2];
-
+    const Ctor = this.constructor as I.GateSchemaBaseConstructor;
     if (typeof options === 'function') {
       cb = options as I.ValidationCallback;
       options = undefined;
@@ -543,22 +543,15 @@ class GateSchema implements I.GateSchemaBase {
     };
 
     if (typeof cb === 'function') {
-      (this.constructor as I.GateSchemaBaseConstructor).validate(
-        value,
-        ctx,
-        (err: any) => {
-          cb(err);
-        }
-      );
+      Ctor.validate(value, ctx, (err: any) => {
+        cb(err === Ctor.BREAK ? null : err);
+      });
     } else {
       return new Promise((resolve, reject) => {
-        (this.constructor as I.GateSchemaBaseConstructor).validate(
-          value,
-          ctx,
-          (err: any) => {
-            return err ? reject(err) : resolve(err);
-          }
-        );
+        Ctor.validate(value, ctx, (err: any) => {
+          err = err === Ctor.BREAK ? null : err;
+          return err ? reject(err) : resolve(err);
+        });
       });
     }
   }

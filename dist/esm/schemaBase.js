@@ -360,7 +360,7 @@ var GateSchema = (function () {
             if (err) {
                 switch (true) {
                     case err === BREAK:
-                        result = null;
+                        result = BREAK;
                         break;
                     case err instanceof VError:
                         result = err;
@@ -423,7 +423,6 @@ var GateSchema = (function () {
         return this;
     };
     GateSchema.prototype.validate = function () {
-        var _this = this;
         var args = [];
         for (var _i = 0; _i < arguments.length; _i++) {
             args[_i] = arguments[_i];
@@ -431,6 +430,7 @@ var GateSchema = (function () {
         var value = arguments[0];
         var options = arguments[1];
         var cb = arguments[2];
+        var Ctor = this.constructor;
         if (typeof options === 'function') {
             cb = options;
             options = undefined;
@@ -452,13 +452,14 @@ var GateSchema = (function () {
             options: options
         };
         if (typeof cb === 'function') {
-            this.constructor.validate(value, ctx, function (err) {
-                cb(err);
+            Ctor.validate(value, ctx, function (err) {
+                cb(err === Ctor.BREAK ? null : err);
             });
         }
         else {
             return new Promise(function (resolve, reject) {
-                _this.constructor.validate(value, ctx, function (err) {
+                Ctor.validate(value, ctx, function (err) {
+                    err = err === Ctor.BREAK ? null : err;
                     return err ? reject(err) : resolve(err);
                 });
             });
