@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/GateSchema/gateschema-js.svg?branch=master)](https://travis-ci.org/GateSchema/gateschema-js)  [![Coverage Status](https://coveralls.io/repos/github/GateSchema/gateschema-js/badge.svg)](https://coveralls.io/github/GateSchema/gateschema-js)
 
-A small, simple and expressive [GateSchema](https://github.com/GateSchema/GateSchema) implementation  
+A small, simple and expressive [GateSchema](https://github.com/GateSchema/GateSchema-Specification) implementation  
 * Zero dependencies  
 * 6.2k gziped  
 
