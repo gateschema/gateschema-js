@@ -1,45 +1,5 @@
-* [Keywords](#keywords)
-    * [Existance](#existance)
-      * [required](#required)
-      * [optional](#optional)
-    * [Base Types](#base-types)
-      * [boolean](#boolean)
-      * [binary](#binary)
-      * [number](#number)
-      * [string](#string)
-    * [Complex Types](#complex-types)
-      * [any](#any)
-      * [enum(definition: {[label: string]: number})](#enumdefinition-label-string-number)
-      * [enumList(definition: {[label: string]: number})](#enumlistdefinition-label-string-number)
-      * [list(schema: GateSchema)](#listschema-gateschema)
-      * [map(definition: {[key:string]: GateSchema})](#mapdefinition-keystring-gateschema)
-      * [oneOf(schemas: GateSchema[])](#oneofschemas-gateschema)
-      * [value(value: any)](#valuevalue-any)
-    * [Branching](#branching)
-      * [switch(path: string, cases: {case: GateSchema, schema: GateSchema}[])](#switchpath-string-cases-case-gateschema-schema-gateschema)
-    * [Utils](#utils)
-      * [equal(path: string)](#equalpath-string)
-      * [format(type: "date" | "date-time" | "hostname" | "uri" | "url" | "email" | "ipv4" | "ipv6")](#formattype-date--date-time--hostname--uri--url--email--ipv4--ipv6)
-      * [length(range: number | [number] | [undefined, number] | [number, undefined] | [number, number])](#lengthrange-number--number--undefined-number--number-undefined--number-number)
-      * [not(schema: GateSchema)](#notschema-gateschema)
-      * [notEmpty](#notempty)
-      * [pattern(regex: string | RegExp, flags?: string)](#patternregex-string--regexp-flags-string)
-      * [unique](#unique)
-    * [Other](#other)
-      * [allowAdditional](#allowadditional)
-      * [other(...args: any[])](#otherargs-any)
-* [Methods](#methods)
-      * [validate(...args: any[]): any](#validateargs-any-any)
-      * [toJSON(): Constraint[]](#tojson-constraint)
-      * [$clone(options?: {pick?: string[], omit?: string[]}): GateSchema](#cloneoptions-pick-string-omit-string-gateschema)
-      * [$keys(): string[]](#keys-string)
-      * [$get(...args: any[]): GateSchema](#getargs-any-gateschema)
-      * [$msg](#msg)
-* [Static Methods](#static-methods)
-      * [addMsgs(msgs: Msgs): void](#addmsgsmsgs-msgs-void)
-      * [addKeyword(keyword: Keyword, msgs?: Msgs): void](#addkeywordkeyword-keyword-msgs-msgs-void)
-      * [addAlias(alias: KeywordAlias): void](#addaliasalias-keywordalias-void)
-      * [extend&lt;T extends this&gt;(options?: Options): T](#extendt-extends-thisoptions-options-t)
+
+
 
 ## Keywords  
 
@@ -787,8 +747,8 @@ const schema = _.map({
 })
 ```
 
-## Methods
-#### `validate(...args: any[]): any`  
+## Methods  
+#### `validate(...args: any[]): any`    
   * `validate(value: any, cb: ValidationCallback): void`
   * `validate(value: any, options: ValidationOptions, cb: ValidationCallback): void`
   * `validate(value: any, options?: ValidationOptions): Promise<null|ValidationError|Error>`
@@ -879,7 +839,7 @@ interface ValidationError {
 
 ```  
 
-#### `toJSON(): Constraint[]`
+#### `toJSON(): Constraint[]`  
 Serialize the schema to JSON object
 
 Example  
@@ -936,7 +896,7 @@ interface ConstraintHighOrder extends ConstraintObject{
 }
 
 ```
-#### `$clone(options?: {pick?: string[], omit?: string[]}): GateSchema`
+#### `$clone(options?: {pick?: string[], omit?: string[]}): GateSchema`  
 Clone a schema and pick or omit some keys of the `map` constraints
 
 Example  
@@ -967,7 +927,7 @@ schemaForReadItem.validate({
 })
 ```
 
-#### `$keys(): string[]`
+#### `$keys(): string[]`  
 Get the keys of the `map` constraints  
 
 ```js  
@@ -997,7 +957,7 @@ console.log(schema.$keys())
 // [ '_id', 'email', 'mobile', 'password', 'captcha', 'isRememberMe' ]
 ```
 
-#### `$get(...args: any[]): GateSchema`
+#### `$get(...args: any[]): GateSchema`  
   * `$get(path: string, cb: (schemaOfThePath: GateSchema) => void): GateSchema`
   * `$get(path: string, rootData: any, cb: (schemaOfThePath: GateSchema) => void): GateSchema`
   * `$get(path: string, rootData: any, validationOptions: ValidationOptions, cb: (schemaOfThePath: GateSchema) => void): GateSchema`
@@ -1046,7 +1006,7 @@ schema
   })
 ```
 
-#### `$msg`  
+#### `$msg`    
 Set the error message of the last added constraint  
 
 Example  
@@ -1132,8 +1092,8 @@ schema.validate({name: 'foo'}, err => {
 
 ```
 
-## Static Methods  
-#### `addMsgs(msgs: Msgs): void`  
+## Static Methods    
+#### `addMsgs(msgs: Msgs): void`    
 Add your own messages or overide default messages
 
 ```js  
@@ -1164,7 +1124,7 @@ schema.validate(null, err => {
 })
 ```
 
-#### `addKeyword(keyword: Keyword, msgs?: Msgs): void`
+#### `addKeyword(keyword: Keyword, msgs?: Msgs): void`  
 Add custom keyword  
 
 Example  
@@ -1224,7 +1184,7 @@ interface Keyword {
   getMatchSchema?: (options: {id: string, args: any, rootData: any, state: any }, cb: (schema?: GateSchemaBase) => any) => any
 }
 ```
-#### `addAlias(alias: KeywordAlias): void`
+#### `addAlias(alias: KeywordAlias): void`  
 Add alias for keyword or schema
 
 
@@ -1268,7 +1228,7 @@ interface KeywordAlias {
 }
 ```
 
-#### `extend<T extends this>(options?: Options): T`
+#### `extend<T extends this>(options?: Options): T`  
 Create your own GateSchema Class
 
 Interfaces

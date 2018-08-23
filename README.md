@@ -68,7 +68,7 @@ see [api](docs/api.md)
 
 ## Q&A  
 ### Custom messages and i18n  
-  see $msg and addMsgs
+see [`$msg`](docs/api.md#msg) and [`addMsgs`](docs/api.md#addmsgsmsgs-msgs-void)
 
 ### Require fields conditionally  
 ```js  
