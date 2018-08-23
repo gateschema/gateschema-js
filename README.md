@@ -5,7 +5,7 @@ A small, simple and expressive [GateSchema](https://github.com/GateSchema/GateSc
 * 6.2k gziped  
 
 ## What is GateSchema  
-GateSchema specifies a list of keywords and a JSON-based format to define constraints of the data required by a given function, service or application. See [GateSchema](https://github.com/GateSchema/GateSchema) for more details.  
+GateSchema specifies a list of keywords and a JSON-based format to define constraints of the data required by a given function, service or application. See [GateSchema](https://github.com/GateSchema/GateSchema-Specification) for more details.  
 
 With tools of GateSchema, you may be able to  
 * create schema using simple syntax provided by [gateschema-js](https://github.com/GateSchema/gateschema-js)   
