@@ -5,18 +5,24 @@ A small, simple and expressive [GateSchema](https://github.com/GateSchema/GateSc
 * 6.2k gziped  
 
 ## What is GateSchema  
-GateSchema specifies a list of keywords and a JSON-based format to define constraints of the data required by a given function, service or application. See [GateSchema](https://github.com/GateSchema/GateSchema-Specification) for more details.  
+GateSchema specifies a list of keywords and a JSON-based format to define constraints of the data required by a given function, service or application. See [GateSchema-Specifation](https://github.com/GateSchema/GateSchema-Specification) for more details.  
 
-With tools of GateSchema, you may be able to  
-* create schema using simple syntax provided by [gateschema-js](https://github.com/GateSchema/gateschema-js)   
-* share schema between client-side and server-side, crossing language    
-* generate forms, see [gateschema-form-vue](https://github.com/GateSchema/gateschema-form-vue) and [gateschema-form-react](https://github.com/GateSchema/gateschema-form-react)  
-* describe rpc service, see [Parton API](https://github.com/partonio/PartonAPI-Specification)(WIP)
+Ecosystem   
+* Schema Creation and Serialization
+  * [gateschema-js](https://github.com/GateSchema/gateschema-js)   
+* Data Validation  
+  * [gateschema-js](https://github.com/GateSchema/gateschema-js)   
+* Form Generation  
+  * [gateschema-form-vue](https://github.com/GateSchema/gateschema-form-vue)
+  * [gateschema-form-react](https://github.com/GateSchema/gateschema-form-react)   
+* RPC Definition
+  * PartonAPI(WIP)  
 
 
 ## Quick Start  
 ```js  
-import _ from 'gateschema'  
+import _ from 'gateschema' 
+// Schema creation   
 const schema = _
   .required
   .map({
@@ -37,7 +43,7 @@ const userInput = {
   // ....
 } 
 
-
+// Data Validation
 // callback style
 schema.validate(userInput, (err) => {
   if (err) {
@@ -56,6 +62,9 @@ schema
     // ...
   })
 
+
+// Serialization
+console.log(schema.toJSON()) // or JSON.stringify(schema)
 ```
 
 ## Install  

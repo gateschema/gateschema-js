@@ -1221,7 +1221,13 @@ Interfaces
 ```ts
 interface Keyword {
   name: string,
+  // if this keyword need params?
   isHighOrder?: boolean,
+  // if the validation of this keyword is asynchronous
+  isAsync?: boolean;
+  // `add` will be called when this keyword is added to a schema
+  // we have default `add` method 
+  // so you don't need to define `add` method in most cases
   add?: (...args: any[]) => any
   msg?: string | {[msgKey:string]: string},
   validator: (value: any, ctx: ValidationCtx | ValidationCtxHighOrder, cb: (err?: any) => any) => void,
@@ -1229,6 +1235,9 @@ interface Keyword {
   getMatchSchema?: (options: {id: string, args: any, rootData: any, state: any }, cb: (schema?: GateSchemaBase) => any) => any
 }
 ```
+
+see `src/keywords` for more examples
+
 #### `addAlias(alias: KeywordAlias): void`  
 Add alias for keyword or schema
 
