@@ -399,16 +399,25 @@ class GateSchema implements I.GateSchemaBase {
     { path, rootData, schema, state, options = {} }: I.SchemaValidationCtx,
     cb: I.ValidationCallback
   ) {
-    const resultCache = getCacheResult(path, schema, state);
-    if (resultCache) {
-      return cb(resultCache);
-    }
     const { _validators, BREAK, Error: VError, _asyncKeywords } = this;
     const {
       removeAdditional: REMOVE_ADDITIONAL,
       skips: SKIPS,
-      skipAsync: SKIP_ASYNC
+      skipAsync: SKIP_ASYNC,
+      useCache: USE_CACHE
     } = options;
+    if (USE_CACHE) {
+      const resultCache = getCacheResult(path, schema, state);
+      if (resultCache) {
+        return cb(resultCache);
+      }
+
+      const originCb = cb;
+      cb = (err: any) => {
+        appendCacheResult(err, path, schema, state);
+        originCb(err);
+      };
+    }
     const constraints = getConstraints(schema);
     const constraintsLength = constraints.length;
     let i = 0;
@@ -442,7 +451,6 @@ class GateSchema implements I.GateSchemaBase {
               state
             });
         }
-        appendCacheResult(result, path, schema, state);
         cb(result);
       } else if (i < constraintsLength) {
         item = constraints[i++];
@@ -481,7 +489,6 @@ class GateSchema implements I.GateSchemaBase {
           );
         }
       } else {
-        appendCacheResult(null, path, schema, state);
         if (REMOVE_ADDITIONAL) {
           removeAdditional(path, state);
         }

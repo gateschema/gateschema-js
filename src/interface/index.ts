@@ -180,6 +180,7 @@ export interface ValidationOptions {
   removeAdditional?: boolean;
   skipAsync?: boolean;
   skips?: string[];
+  useCache?: boolean;
 }
 
 export interface GateSchemaBase {
@@ -254,6 +255,8 @@ export interface GateSchemaKeywords {
       | [number, number]
   ): GateSchema;
   notEmpty: GateSchema;
+  max(value: number, isExclusive?: boolean): GateSchema;
+  min(value: number, isExclusive?: boolean): GateSchema;
   pattern(regex: string | RegExp, flags?: string): GateSchema;
   unique: GateSchema;
 
