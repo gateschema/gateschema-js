@@ -1,18 +1,18 @@
-[![Build Status](https://travis-ci.org/GateSchema/gateschema-js.svg?branch=master)](https://travis-ci.org/GateSchema/gateschema-js)  [![Coverage Status](https://coveralls.io/repos/github/GateSchema/gateschema-js/badge.svg)](https://coveralls.io/github/GateSchema/gateschema-js)
+[![Build Status](https://travis-ci.org/gateschema/gateschema-js.svg?branch=master)](https://travis-ci.org/gateschema/gateschema-js)  [![Coverage Status](https://coveralls.io/repos/github/gateschema/gateschema-js/badge.svg)](https://coveralls.io/github/gateschema/gateschema-js)
 
-A small, simple and expressive [GateSchema](https://github.com/GateSchema/GateSchema-Specification) implementation  
+A small, simple and expressive [GateSchema](https://github.com/gateschema/GateSchema-Specification) implementation  
 
 ## What is GateSchema  
-GateSchema specifies a list of keywords and a JSON-based format to define constraints of the data required by a given function, service or application. See [GateSchema-Specifation](https://github.com/GateSchema/GateSchema-Specification) for more details.  
+GateSchema specifies a list of keywords and a JSON-based format to define constraints of the data required by a given function, service or application. See [GateSchema-Specifation](https://github.com/gateschema/GateSchema-Specification) for more details.  
 
 Ecosystem   
 * Schema Creation and Serialization
-  * [gateschema-js](https://github.com/GateSchema/gateschema-js)   
+  * [gateschema-js](https://github.com/gateschema/gateschema-js)   
 * Data Validation  
-  * [gateschema-js](https://github.com/GateSchema/gateschema-js)   
+  * [gateschema-js](https://github.com/gateschema/gateschema-js)   
 * Form Generation  
-  * [gateschema-form-vue](https://github.com/GateSchema/gateschema-form-vue)
-  * [gateschema-form-react](https://github.com/GateSchema/gateschema-form-react)   
+  * [gateschema-form-vue](https://github.com/gateschema/gateschema-form-vue)
+  * [gateschema-form-react](https://github.com/gateschema/gateschema-form-react)   
 * RPC Definition
   * PartonAPI(WIP)  
 
@@ -153,6 +153,9 @@ const schema = _
   ])
   .$msg('Please input email or phone')
 ```
+
+## Changelog  
+See [CHANGELOG](./CHANGELOG.md)
 
 ## License  
 MIT
