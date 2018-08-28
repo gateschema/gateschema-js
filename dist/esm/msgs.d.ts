@@ -22,6 +22,10 @@ declare const _default: {
     length_binary_min: string;
     length_binary_max: string;
     length_binary_range: string;
+    max: string;
+    max_exclusive: string;
+    min: string;
+    min_exclusive: string;
     notEmpty: string;
     oneOf: string;
     pattern: string;

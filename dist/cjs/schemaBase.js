@@ -347,12 +347,19 @@ var GateSchema = (function () {
     GateSchema.validate = function (value, _a, cb) {
         var _this = this;
         var path = _a.path, rootData = _a.rootData, schema = _a.schema, state = _a.state, _b = _a.options, options = _b === void 0 ? {} : _b;
-        var resultCache = getCacheResult(path, schema, state);
-        if (resultCache) {
-            return cb(resultCache);
-        }
         var _c = this, _validators = _c._validators, BREAK = _c.BREAK, VError = _c.Error, _asyncKeywords = _c._asyncKeywords;
-        var REMOVE_ADDITIONAL = options.removeAdditional, SKIPS = options.skips, SKIP_ASYNC = options.skipAsync;
+        var REMOVE_ADDITIONAL = options.removeAdditional, SKIPS = options.skips, SKIP_ASYNC = options.skipAsync, USE_CACHE = options.useCache;
+        if (USE_CACHE) {
+            var resultCache = getCacheResult(path, schema, state);
+            if (resultCache) {
+                return cb(resultCache);
+            }
+            var originCb_1 = cb;
+            cb = function (err) {
+                appendCacheResult(err, path, schema, state);
+                originCb_1(err);
+            };
+        }
         var constraints = util_1.getConstraints(schema);
         var constraintsLength = constraints.length;
         var i = 0;
@@ -385,7 +392,6 @@ var GateSchema = (function () {
                             state: state
                         });
                 }
-                appendCacheResult(result, path, schema, state);
                 cb(result);
             }
             else if (i < constraintsLength) {
@@ -413,7 +419,6 @@ var GateSchema = (function () {
                 }
             }
             else {
-                appendCacheResult(null, path, schema, state);
                 if (REMOVE_ADDITIONAL) {
                     removeAdditional(path, state);
                 }

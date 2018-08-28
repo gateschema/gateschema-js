@@ -147,6 +147,7 @@ export interface ValidationOptions {
     removeAdditional?: boolean;
     skipAsync?: boolean;
     skips?: string[];
+    useCache?: boolean;
 }
 export interface GateSchemaBase {
     constraints: Constraint[];
@@ -196,6 +197,8 @@ export interface GateSchemaKeywords {
     format(type: 'date' | 'date-time' | 'hostname' | 'uri' | 'url' | 'email' | 'ipv4' | 'ipv6'): GateSchema;
     length(range: number | [number] | [undefined, number] | [number, undefined] | [number, number]): GateSchema;
     notEmpty: GateSchema;
+    max(value: number, isExclusive?: boolean): GateSchema;
+    min(value: number, isExclusive?: boolean): GateSchema;
     pattern(regex: string | RegExp, flags?: string): GateSchema;
     unique: GateSchema;
     allowAdditional: GateSchema;

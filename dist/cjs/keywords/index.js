@@ -20,6 +20,8 @@ var switch_1 = __importDefault(require("./switch"));
 var equal_1 = __importDefault(require("./equal"));
 var format_1 = __importDefault(require("./format"));
 var length_1 = __importDefault(require("./length"));
+var max_1 = __importDefault(require("./max"));
+var min_1 = __importDefault(require("./min"));
 var not_1 = __importDefault(require("./not"));
 var notEmpty_1 = __importDefault(require("./notEmpty"));
 var pattern_1 = __importDefault(require("./pattern"));
@@ -43,6 +45,8 @@ exports.default = [
     format_1.default,
     pattern_1.default,
     length_1.default,
+    min_1.default,
+    max_1.default,
     unique_1.default,
     not_1.default,
     notEmpty_1.default,

@@ -15,6 +15,8 @@ import keywordSwitch from './switch';
 import equal from './equal';
 import format from './format';
 import length from './length';
+import max from './max';
+import min from './min';
 import not from './not';
 import notEmpty from './notEmpty';
 import pattern from './pattern';
@@ -38,6 +40,8 @@ export default [
     format,
     pattern,
     length,
+    min,
+    max,
     unique,
     not,
     notEmpty,
