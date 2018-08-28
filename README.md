@@ -1,8 +1,6 @@
 [![Build Status](https://travis-ci.org/GateSchema/gateschema-js.svg?branch=master)](https://travis-ci.org/GateSchema/gateschema-js)  [![Coverage Status](https://coveralls.io/repos/github/GateSchema/gateschema-js/badge.svg)](https://coveralls.io/github/GateSchema/gateschema-js)
 
 A small, simple and expressive [GateSchema](https://github.com/GateSchema/GateSchema-Specification) implementation  
-* Zero dependencies  
-* 6.2k gziped  
 
 ## What is GateSchema  
 GateSchema specifies a list of keywords and a JSON-based format to define constraints of the data required by a given function, service or application. See [GateSchema-Specifation](https://github.com/GateSchema/GateSchema-Specification) for more details.  

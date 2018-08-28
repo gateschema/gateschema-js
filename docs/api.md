@@ -24,6 +24,8 @@
     - [`equal(path: string)`](#equalpath-string)
     - [`format(type: "date" | "date-time" | "hostname" | "uri" | "url" | "email" | "ipv4" | "ipv6")`](#formattype-date--date-time--hostname--uri--url--email--ipv4--ipv6)
     - [`length(range: number | [number] | [undefined, number] | [number, undefined] | [number, number])`](#lengthrange-number--number--undefined-number--number-undefined--number-number)
+    - [`max(value: number, isExclusive?: boolean)`](#maxvalue-number-isexclusive-boolean)
+    - [`min(value: number, isExclusive?: boolean)`](#minvalue-number-isexclusive-boolean)
     - [`not(schema: GateSchema)`](#notschema-gateschema)
     - [`notEmpty`](#notempty)
     - [`pattern(regex: string | RegExp, flags?: string)`](#patternregex-string--regexp-flags-string)
@@ -50,7 +52,7 @@
 
 ### Existance
 #### `required`   
-Expect the input value to neither be `undefined` nor `null`  
+Expect the input to neither be `undefined` nor `null`  
 
 Alias `r`
 
@@ -75,7 +77,7 @@ schema.validate(null, (err) => {
 ```
 
 #### `optional`
-The input value can be `undefined` or `null`
+The input can be `undefined` or `null`
 
 Alias `o`
 
@@ -97,7 +99,7 @@ schema.validate(null, (err) => {
 
 ### Base Types
 #### `boolean`
-Expect the input value to be `true` or `false`
+Expect the input to be `true` or `false`
 
 Alias `bool`
 
@@ -123,7 +125,7 @@ schema.validate(1, (err) => {
 ```
 
 #### `binary`  
-Expect the input value to be a `ArrayBuffer` or base64 `string`
+Expect the input to be a `ArrayBuffer` or base64 `string`
 
 Alias `bin`
 
@@ -155,7 +157,7 @@ schema.validate('foo', (err) => {
 ```
 
 #### `number`   
-Expect the input value to be a `number` or numeric `string`  
+Expect the input to be a `number` or numeric `string`  
 
 Alias `num`  
 
@@ -185,7 +187,7 @@ schema.validate('abc', (err) => {
 ```
 
 #### `string`  
-Expect the input value to be a `string`  
+Expect the input to be a `string`  
 
 Alias `str`  
 
@@ -212,7 +214,7 @@ schema.validate(123, (err) => {
 
 ### Complex Types  
 #### `any`
-The input value can be anything
+The input can be anything
 
 Example   
 ```js
@@ -235,7 +237,7 @@ schema.validate(1, (err) => {
 ```
 
 #### `enum(definition: {[label: string]: number})`
-Expect the input value to be one of the defined values
+Expect the input to be one of the defined values
 
 Example  
 ```js
@@ -261,7 +263,7 @@ schema.validate(3, (err) => {
 ```
 
 #### `enumList(definition: {[label: string]: number})`
-Expect the input value to be a list of the defined values
+Expect the input to be a list of the defined values
 
 
 Example  
@@ -290,7 +292,7 @@ schema.validate([3], (err) => {
 
 
 #### `list(schema: GateSchema)`
-Expect the input value to be a list of values that satisfy the passing schema
+Expect the input to be a list of values that satisfy the passing schema
 
 Example  
 ```js 
@@ -313,7 +315,7 @@ schema.validate(['a', 'b'], (err) => {
 ```
 
 #### `map(definition: {[key:string]: GateSchema})`
-Expect the input value to be a map with keys and values that satisfy the definition 
+Expect the input to be a map with keys and values that satisfy the definition 
 
 Example  
 ```js
@@ -345,7 +347,7 @@ schema.validate({
 
 
 #### `oneOf(schemas: GateSchema[])`
-Expect the input value to satisfy one of the passing schemas
+Expect the input to satisfy one of the passing schemas
 
 Example  
 ```js
@@ -377,7 +379,7 @@ schema.validate(true, (err) => {
 ```
 
 #### `value(value: any)`
-Expect the input value is the passing value
+Expect the input is the passing value
 
 Example  
 ```js
@@ -402,7 +404,7 @@ schema.validate('1', (err) => {
 
 ### Branching
 #### `switch(path: string, cases: {case: GateSchema, schema: GateSchema}[])`
-Expect the input value to satisfy a schema depends on the value of the passing `path` and the cases  
+Expect the input to satisfy a schema depends on the value of the passing `path` and the cases  
 If there is no matching case, it will pass  
 If you want a default case, you can use the `any` keyword  
 
@@ -464,7 +466,7 @@ schema.validate({
 
 ### Utils  
 #### `equal(path: string)`
-Expect the input value to be equal to the value of the passing `path`  
+Expect the input to be equal to the value of the passing `path`  
 
 Example  
 ```js
@@ -488,7 +490,7 @@ schema.validate({
 
 ```
 #### `format(type: "date" | "date-time" | "hostname" | "uri" | "url" | "email" | "ipv4" | "ipv6")` 
-Expect the input value to be in the passing format  
+Expect the input to be in the passing format  
 
 * date: see full-date in https://tools.ietf.org/html/rfc3339#section-5.6, examples:  
   * 1990-12-31  
@@ -546,9 +548,9 @@ schema.validate('2018/07/30', (err) => {
 
 #### `length(range: number | [number] | [undefined, number] | [number, undefined] | [number, number])`
 `range` can be a `number` or an array `[min?: number, max?: number]`  
-If the input value is a `string`, expect it to contain `range` characters.  
-If the input value is a `list`, expect it to contain `range` elements.  
-If the input value is a `binary`, expect it to contain `range` bytes.  
+If the input is a `string`, expect it to contain `range` characters.  
+If the input is a `list`, expect it to contain `range` elements.  
+If the input is a `binary`, expect it to contain `range` bytes.  
 
 Example  
 ```js  
@@ -652,13 +654,94 @@ schema.validate(new ArrayBuffer(2), (err) => {
   // null
 })
 ```
+#### `max(value: number, isExclusive?: boolean)`  
+Expect the input to be less than or equal to the passing value  
+If `isExclusive` is `true`, then expect the input to be less than the passing value  
+
+Example  
+```js  
+const schema = _.number.max(9)
+
+schema.validate(9, (err) => {
+  console.log(err)
+  // null
+})
+
+schema.validate(10, (err) => {
+  console.log(err)
+ // ValidationError {
+ // keyword: 'max',
+ // msgParams: { KEY: 'max', value: 10, max: 9, isExclusive: undefined },
+ // path: '/',
+ // value: 10,
+ // msg: 'should be less than or equal to 9' }
+})
+
+const schemaExclusive = _.number.max(9, true)
+
+schemaExclusive.validate(8, (err) => {
+  console.log(err)
+  // null
+})
+
+schemaExclusive.validate(9, (err) => {
+  console.log(err)
+  // ValidationError {
+  //   keyword: 'max',
+  //   msgParams: { KEY: 'max_exclusive', value: 9, max: 9, isExclusive: true },
+  //   path: '/',
+  //   value: 9,
+  //   msg: 'should be less than 9' }
+})
+
+```
+
+#### `min(value: number, isExclusive?: boolean)`
+Expect the input to be greater than or equal to the passing value   
+if `isExclusive` is `true`, then expect the input to be greater than the passing value   
+
+Example  
+```js  
+const schema = _.number.min(7)
+
+schema.validate(7, (err) => {
+  console.log(err)
+  // null
+})
+schema.validate(6, (err) => {
+  console.log(err)
+  // ValidationError {
+  //   keyword: 'min',
+  //   msgParams: { KEY: 'min', value: 6, min: 7, isExclusive: undefined },
+  //   path: '/',
+  //   value: 6,
+  //   msg: 'should be greater than or equal to 7' }
+})
+
+const schemaExclusive = _.number.min(7, true)
+
+schemaExclusive.validate(8, (err) => {
+  console.log(err)
+  // null
+})
+schemaExclusive.validate(7, (err) => {
+  console.log(err)
+  // ValidationError {
+  //   keyword: 'min',
+  //   msgParams: { KEY: 'min_exclusive', value: 7, min: 7, isExclusive: true },
+  //   path: '/',
+  //   value: 7,
+  //   msg: 'should be greater than 7' }
+})
+
+```
 
 #### `not(schema: GateSchema)`  
-Expect the input value do not satisfy the passing schema  
+Expect the input do not satisfy the passing schema  
 
 
 #### `notEmpty`
-Expect the input value to neither be `0`, `''`, `list` without elements nor `map` without any key
+Expect the input to neither be `0`, `''`, `list` without elements nor `map` without any key
 
 Example  
 ```js  
