@@ -85,15 +85,44 @@ class GateSchema implements I.GateSchemaBase {
     } = keyword;
     const proto = this.prototype;
     const ctor = this;
-    Object.defineProperty(ctor, name, {
-      get() {
-        // notice: use `this` here
-        return new this()[name];
-      }
-    });
-    Object.defineProperty(proto, name, {
-      get: ctor.createAddFunction(keyword)
-    });
+    if (name === 'length') {
+      try {
+        Object.defineProperty(ctor, name, {
+          get() {
+            // tslint:disable-next-line
+            console.warn('[GateSchema Warn] `length` keyword has been deprecated, please use `len` instead')
+            // notice: use `this` here
+            return new this()[name];
+          }
+        });
+        Object.defineProperty(proto, name, {
+          get() {
+            // tslint:disable-next-line
+            console.warn('[GateSchema Warn] `length` keyword has been deprecated, please use `len` instead')
+            return (...args: any[]) => {
+              if (!args) {
+                throw new Error('arguments are required');
+              }
+              return this.add({
+                args,
+                keyword: name
+              });
+            };
+          }
+        });
+      // tslint:disable-next-line
+      } catch {}
+    } else {
+      Object.defineProperty(ctor, name, {
+        get() {
+          // notice: use `this` here
+          return new this()[name];
+        }
+      });
+      Object.defineProperty(proto, name, {
+        get: ctor.createAddFunction(keyword)
+      });
+    }
 
     if (msgs) {
       this.addMsgs(msgs);

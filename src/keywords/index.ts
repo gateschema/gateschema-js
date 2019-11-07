@@ -25,6 +25,7 @@ import keywordSwitch from './switch';
 // util
 import equal from './equal';
 import format from './format';
+import len from './len';
 import length from './length';
 import max from './max';
 import min from './min';
@@ -57,6 +58,7 @@ export default [
   pattern,
 
   length,
+  len,
   min,
   max,
 
