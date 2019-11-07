@@ -85,14 +85,46 @@ var GateSchema = (function () {
         var name = keyword.name, validator = keyword.validator, getChildSchema = keyword.getChildSchema, getMatchSchema = keyword.getMatchSchema, isAsync = keyword.isAsync;
         var proto = this.prototype;
         var ctor = this;
-        Object.defineProperty(ctor, name, {
-            get: function () {
-                return new this()[name];
+        if (name === 'length') {
+            try {
+                Object.defineProperty(ctor, name, {
+                    get: function () {
+                        console.warn('[GateSchema Warn] `length` keyword has been deprecated, please use `len` instead');
+                        return new this()[name];
+                    }
+                });
+                Object.defineProperty(proto, name, {
+                    get: function () {
+                        var _this = this;
+                        console.warn('[GateSchema Warn] `length` keyword has been deprecated, please use `len` instead');
+                        return function () {
+                            var args = [];
+                            for (var _i = 0; _i < arguments.length; _i++) {
+                                args[_i] = arguments[_i];
+                            }
+                            if (!args) {
+                                throw new Error('arguments are required');
+                            }
+                            return _this.add({
+                                args: args,
+                                keyword: name
+                            });
+                        };
+                    }
+                });
             }
-        });
-        Object.defineProperty(proto, name, {
-            get: ctor.createAddFunction(keyword)
-        });
+            catch (_a) { }
+        }
+        else {
+            Object.defineProperty(ctor, name, {
+                get: function () {
+                    return new this()[name];
+                }
+            });
+            Object.defineProperty(proto, name, {
+                get: ctor.createAddFunction(keyword)
+            });
+        }
         if (msgs) {
             this.addMsgs(msgs);
         }

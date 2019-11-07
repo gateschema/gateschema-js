@@ -19,6 +19,7 @@ var value_1 = __importDefault(require("./value"));
 var switch_1 = __importDefault(require("./switch"));
 var equal_1 = __importDefault(require("./equal"));
 var format_1 = __importDefault(require("./format"));
+var len_1 = __importDefault(require("./len"));
 var length_1 = __importDefault(require("./length"));
 var max_1 = __importDefault(require("./max"));
 var min_1 = __importDefault(require("./min"));
@@ -45,6 +46,7 @@ exports.default = [
     format_1.default,
     pattern_1.default,
     length_1.default,
+    len_1.default,
     min_1.default,
     max_1.default,
     unique_1.default,
